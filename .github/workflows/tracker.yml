@@ -54,7 +54,7 @@ jobs:
         WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
     - name: Move and commit new Timeslot.xlsx
-      if: env.is_weekday == 'true' && steps.compare.outputs.changes_detected == 'true'
+      if: env.is_weekday == 'true' && env.changes_detected == 'true'
       run: |
         mv timeslot.xlsx data/Timeslot.xlsx
         git config --global user.name 'github-actions[bot]'
