@@ -46,6 +46,13 @@ jobs:
       run: |
         python compare_excel.py timeslot.xlsx data/Timeslot.xlsx
 
+    - name: Notify Teams
+      if: env.is_weekday == 'true' && env.changes_detected == 'true'
+      run: |
+        python notify_teams.py "$WEBHOOK_URL" changes.txt
+      env:
+        WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+
     - name: Move and commit new Timeslot.xlsx
       if: env.is_weekday == 'true' && steps.compare.outputs.changes_detected == 'true'
       run: |
