@@ -1,11 +1,12 @@
 name: Timeslot Tracker
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  issues:
+    types: [opened]
 
 jobs:
   track-changes:
+    if: contains(github.event.issue.title, 'Timeslot modified')
     runs-on: ubuntu-latest
     
     steps:
