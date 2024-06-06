@@ -1,5 +1,6 @@
 import openpyxl
 import sys
+import os
 
 def compare_excel_files(new_file_path, old_file_path):
     wb_new = openpyxl.load_workbook(new_file_path)
