@@ -7,8 +7,9 @@ def notify_teams(webhook_url, report_file):
         changes = f.read()
     
     if changes:
+        changes = changes.replace("\n", "<br>")
         payload = {
-            "text": f"Changes detected in the Excel file:\n{changes}"
+            "text": f"Changes detected in the Excel file:<br>{changes}"
         }
         requests.post(webhook_url, headers={"Content-Type": "application/json"}, data=json.dumps(payload))
 
