@@ -12,7 +12,7 @@ def compare_excel_files(new_file_path, old_file_path):
     changes = []
 
     # Read dates from row 5, columns E to K
-    dates = [sheet_new.cell(row=5, column=col).value for col in range(5, 12)]
+    dates = [sheet_new.cell(row=5, column=col).value.date() for col in range(5, 12)]
 
     for row in range(7, 45):  # Rows 7 to 44
         for col in range(5, 12):  # Columns E to K
