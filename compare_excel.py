@@ -16,12 +16,14 @@ def compare_excel_files(new_file_path, old_file_path):
             old_value = sheet_old.cell(row=cell.row, column=cell.column).value
             new_value = cell.value
             if old_value != new_value:
-                changes.append({
-                    "row": cell.row,
-                    "column": cell.column,
-                    "old_value": old_value,
-                    "new_value": new_value
-                })
+                # Only include changes to regular cell values
+                if not isinstance(old_value, openpyxl.worksheet.formula.ArrayFormula) and not isinstance(new_value, openpyxl.worksheet.formula.ArrayFormula):
+                    changes.append({
+                        "row": cell.row,
+                        "column": cell.column,
+                        "old_value": old_value,
+                        "new_value": new_value
+                    })
 
     with open('changes.txt', 'w') as f:
         for change in changes:
